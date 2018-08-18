@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Week 3 Form Validation</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="form">
+    <form name="info">
+      <label for="firstName">
+        First Name:
+        <input type="text" id="firstName"> <span id="fn_Error"></span>
+      </label>
+      <br>
+      <label for="lastName">
+        Last Name:
+        <input type="text" id="lastName"> <span id="ln_Error"></span>
+      </label>
+      <br>
+      <label for="email">
+        Email:
+        <input type="text" id="email"> <span id="email_Error"></span>
+      </label>
+      <br>
+      <label for="emailConfirmation">
+        Email Confirmation:
+        <input type="text" id="emailConfirmation"> <span id="emailConfirmation_Error"></span>
+      </label>
+      <br>
+      <label for="phoneNumber">
+        Phone Number:
+        <input type="text" id="phoneNumber"> <span id="phone_Error"></span>
+      </label>
+      <br>
+      <input type="button" value="submit">
+    </form>
+  </div>
+  <div id="confirmation">
+    <h1>Confirmation</h1>
+  </div>
+  <script src="index.js"></script>
+</body>
+</html>

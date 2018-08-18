@@ -1,0 +1,34 @@
+#form 
+{
+	position:relative;
+	width: 500px;
+	margin-left:auto;
+	margin-right:auto;
+	background-color:#aaa;
+	border: 1px solid black;
+  padding: 10px;
+}
+
+#confirmation
+{
+	position: relative;
+	width: 400px;
+	margin-left: auto;
+	margin-right: auto;
+	background-color: #aaa;
+	border: 1px solid black;
+	padding: 10px;
+	display: none;
+}
+
+.red {
+  color: red;
+}
+
+label {
+  display: block;
+}
+
+div[id*="Message"] {
+  display: none;
+}

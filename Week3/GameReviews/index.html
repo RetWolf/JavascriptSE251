@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Game Reviews</title>
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+        <h1>Game Reviews</h1>
+        
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Game Title</th>
+              <th>Console</th>
+              <th>Rating</th>
+              <th>Score</th>
+            </tr>
+          </thead>
+          <tbody id="reviewsBody">
+
+          </tbody>
+        </table>
+      </div>
+
+      <div id="gamePreview" class="col-md-4" style='margin-top: 200px;'>
+        <h2 id="gameTitle"></h2>
+        <img alt="Game Image" id="gameImage">
+      </div>
+    </div>
+  </div>
+  <script src="index.js"></script>
+</body>
+</html>
