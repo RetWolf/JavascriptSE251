@@ -13,15 +13,17 @@ const showData = async () => {
   const softwareDev = document.getElementById('softwareDev');
   let data = await getData();
   let result = parseData(data);
-  console.log(result);
-  console.log(dbAnalyst.children);
-  Object.entries(dbAnalyst.children).forEach(([key, val]) => {
-    if (key > 0) {
-      val.insertAdjacentHTML('beforeend', Object.values(result[0])[key]);
-    } else {
-      val.innerHTML = Object.values(result[0])[key];
-    }
-  });
+  let options = [dbAnalyst.children, webDev.children, softwareDev.children];
+  for (let i = 0; i < options.length; i++) {
+    const obj = options[i];
+    Object.entries(obj).forEach(([key, val]) => {
+      if (key > 0) {
+        val.insertAdjacentHTML('beforeend', Object.values(result[i])[key]);
+      } else {
+        val.innerHTML = Object.values(result[i])[key];
+      }
+    });
+  }
 }
 
 function parseData(data) {
@@ -33,43 +35,30 @@ function parseData(data) {
   let softwareDevTotal = 0;
 
   let people = [];
-
+  let index = 0;
   data.forEach(el => {
     if (el.jobTitle === 'Database Analyst') {
       numOfDBAnalysts++;
       dbAnalystTotal += Number(el.salary);
-      if (people[0] == null || el.salary > people[0].salary) {
-        people[0] = {
-          type: el.jobTitle,
-          fname: el.name.first,
-          lname: el.name.last,
-          salary: Number(el.salary).toFixed(2),
-        };
-      }
+      index = 0;
     } else if (el.jobTitle === 'Web Developer') {
       numOfWebDevs++;
       webDevTotal += Number(el.salary);
-      if (people[1] == null || el.salary > people[1].salary) {
-        people[1] = {
-          type: el.jobTitle,
-          salary: Number(el.salary).toFixed(2),
-          fname: el.name.first,
-          lname: el.name.last
-        };
-      }
+      index = 1;
     } else if (el.jobTitle === 'Software Developer') {
       numOfSoftwareDevs++;
       softwareDevTotal += Number(el.salary);
-      if (people[2] == null || el.salary > people[2].salary) {
-        people[2] = {
-          type: el.jobTitle,
-          salary: Number(el.salary).toFixed(2),
-          fname: el.name.first,
-          lname: el.name.last
-        };
-      }
+      index = 2;
     } else {
       console.log('Job Title didn\'t match');
+    }
+    if (people[index] == null || el.salary > people[index].salary) {
+      people[index] = {
+        type: el.jobTitle,
+        fname: el.name.first,
+        lname: el.name.last,
+        salary: Number(el.salary).toFixed(2)
+      };
     }
   });
   people[0].averageSalary = Number(dbAnalystTotal / numOfDBAnalysts).toFixed(2);
