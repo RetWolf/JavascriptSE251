@@ -1,6 +1,8 @@
 const selectMonth = document.getElementById('select_Month');
 const selectYear = document.getElementById('select_Year');
 const tbody = document.getElementById('calData');
+const allAvailable = document.getElementById('setAllAvailable');
+const allUnavailable = document.getElementById('setAllUnavailable');
 
 const initialDate = new Date();
 const thisMonth = initialDate.getMonth();
@@ -12,6 +14,8 @@ updateCalendar();
 
 selectMonth.addEventListener('change', updateCalendar);
 selectYear.addEventListener('change', updateCalendar);
+allAvailable.addEventListener('click', setAll);
+allUnavailable.addEventListener('click', setAll);
 
 function getSelectedMonth(el) {
   let index = 0;
@@ -41,7 +45,14 @@ function drawCalendar(yearIndex, monthIndex) {
     }
     let td = document.createElement('td');
     if (i >= firstDay.getDay()) {
+      td.classList.add('day');
       td.innerHTML = 1 + (i - firstDay.getDay());
+      td.addEventListener('click', (e) => {
+        let el = e.target;
+        if (el.style.background === '') {el.style.background = 'green';} 
+        else if (el.style.background === 'green') {el.style.background = 'red'} 
+        else {el.style.background = '';}
+      });
     }
     tr.appendChild(td);
   }
@@ -50,4 +61,15 @@ function drawCalendar(yearIndex, monthIndex) {
 
 function daysInAMonth(yearIndex, monthIndex) {
   return 32 - new Date(yearIndex, monthIndex, 32).getDate();
+}
+
+function setAll(e) {
+  let days = document.getElementsByClassName('day');
+  for(day of days) {
+    if (e.target.id === 'setAllAvailable') {
+      day.style.background = 'green'
+    } else {
+      day.style.background = 'red';
+    }
+  }
 }

@@ -1,0 +1,12 @@
+th {
+  width: 10vw;
+}
+
+tr {
+  height: 10vh;
+}
+
+td {
+  border: 1px solid black;
+  margin: auto;
+}
