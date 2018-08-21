@@ -26,14 +26,26 @@ function getSelectedMonth(el) {
 function updateCalendar() {
   let yearIndex = selectYear.value;
   let monthIndex = getSelectedMonth(selectMonth);
+  tbody.innerHTML = '';
   drawCalendar(yearIndex, monthIndex);
 }
 
 function drawCalendar(yearIndex, monthIndex) {
-  let date1 = new Date(yearIndex, monthIndex);
+  let firstDay = new Date(yearIndex, monthIndex);
   let numOfDays = daysInAMonth(yearIndex, monthIndex);
-  console.log(date1);
-  // Working here on figuring out how to best draw the dates into the table
+  let tr = document.createElement('tr');
+  for (let i = 0; i < numOfDays + firstDay.getDay(); i++) {
+    if (i % 7 === 0 && i !== 0) {
+      tbody.appendChild(tr);
+      tr = document.createElement('tr');
+    }
+    let td = document.createElement('td');
+    if (i >= firstDay.getDay()) {
+      td.innerHTML = 1 + (i - firstDay.getDay());
+    }
+    tr.appendChild(td);
+  }
+  tbody.appendChild(tr);
 }
 
 function daysInAMonth(yearIndex, monthIndex) {
