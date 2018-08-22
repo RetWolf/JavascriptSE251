@@ -11,26 +11,48 @@
 </head>
 <body>
   <div id="initialResults">
-    <section id="dbAnalyst">
+    <section class="setWidth" id="dbAnalyst">
       <h1>Database Analyst</h1>
       <h3>First Name: </h3>
       <h3>Last Name: </h3>
       <h3>Highest Paid Salary: $</h3>
       <h3>Average Paid Salary: $</h3>
     </section>
-    <section id="webDev">
+    <section class="setWidth" id="webDev">
         <h1>Web Developer</h1>
         <h3>First Name: </h3>
         <h3>Last Name: </h3>
         <h3>Highest Paid Salary: $</h3>
         <h3>Average Paid Salary: $</h3>
     </section>
-    <section id="softwareDev">
+    <section class="setWidth" id="softwareDev">
         <h1>Software Engineer</h1>
         <h3>First Name: </h3>
         <h3>Last Name: </h3>
         <h3>Highest Paid Salary: $</h3>
         <h3>Average Paid Salary: $</h3>
+    </section>
+  </div>
+  <div id="searchField">
+    <input type="text" id="fname" placeholder="First Name">
+    <input type="text" id="lname" placeholder="Last Name">
+    <button id="search_Person">Search</button>
+    <section>
+      <h1>Search Output</h1>
+      <div id="search_Results">
+
+      </div>
+    </section>
+  </div>
+  <div id="listField">
+    <button id="listDBAnalysts">List Database Analysts</button>
+    <button id="listWebDevs">List Web Developers</button>
+    <button id="listSoftwareDevs">List Software Developers</button>
+    <section>
+      <h1>List Output</h1>
+      <div id="list_Results">
+
+      </div>
     </section>
   </div>
   <script>

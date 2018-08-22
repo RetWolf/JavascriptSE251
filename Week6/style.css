@@ -1,7 +1,80 @@
 #initialResults {
   display: flex;
+  margin: 20px;
+  flex-flow: row;
+  justify-content: space-around;
 }
 
-section {
+.setWidth {
+  flex-grow: 1;
+  padding-left: 5vw;
+}
+
+#searchField {
+  margin: 35px;
+}
+
+#listField {
+  margin: 35px;
+}
+
+input {
+  padding: 12px 20px;
+  margin: 8px 5px;
+  box-sizing: border-box;
+  border: none;
+  border-bottom: 1px solid grey;
+  transition-duration: 0.2s;
+}
+
+input:focus {
+  border-bottom: 2px solid black;
+  outline: none;
+}
+
+button {
+  background-color: white; /* Green */
+  color: black;
+  padding: 13px 24px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border: 1px solid #008CBA;
+  border-radius: 4px;
+  cursor: pointer;
+  transition-duration: 0.3s;
+}
+
+button:hover {
+  background-color: rgba(0, 139, 186, 0.2)
+}
+
+button:active {
+  transition: cubic-bezier(0.215, 0.610, 0.355, 1);
+}
+
+table {
+  border-collapse: collapse;
+  border: 1px solid black;
   width: 30vw;
+  min-width: 500px;
+}
+
+th {
+  height: 50px;
+  border: none;
+  border-bottom: 1px solid black;
+  background-color: #546e7a;
+  color: #ffffff;
+}
+
+td {
+  height: 40px;
+  text-align: center;
+  border-bottom: 1px solid #c4c4c4;
+}
+
+tr:nth-child(even) {
+  background: #f2f2f2;
 }
