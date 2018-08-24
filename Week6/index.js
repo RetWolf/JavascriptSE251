@@ -1,9 +1,17 @@
 const getData = async () => {
-  try {
-    let res = await fetch('http://ict.neit.edu/evanrense/salaries.php');
-    return await res.json();
-  } catch (err) {
-    console.error(err);
+  if (localStorage.getItem('data') !== null) {
+    console.info('Loaded from LocalStorage');
+    return await JSON.parse(localStorage.getItem('data'));
+  } else {
+    try {
+      let res = await fetch('http://ict.neit.edu/evanrense/salaries.php');
+      console.info('Fetched Data');
+      let data =  await res.json();
+      localStorage.setItem('data', JSON.stringify(data));
+      return data;
+    } catch (err) {
+      console.error(err);
+    }
   }
 };
 
@@ -26,15 +34,70 @@ const showData = async () => {
   }
 }
 
+const liveSearch = async (e) => {
+  /*const searchName = e.target.value;
+  let data = await getData();
+  let results = [];
+  data.forEach(person => {
+    let name = `${person.name.first} ${person.name.last}`;
+    let type = person.jobTitle;
+    let distance = getEditDistance(searchName, name);
+    let result = {
+      name: name,
+      type: type,
+      dist: distance
+    };
+    results.push(result);
+  });
+  results.sort(compare);
+  console.log(results);*/
+  const resultsDiv = document.getElementById('liveSearchResults');
+  resultsDiv.innerHTML = '';
+  if (e.target.value !== '') {
+    const searchRegex = new RegExp(`^${e.target.value}`, 'gim');
+    const searchName = e.target.value;
+    let data = await getData();
+    let results = [];
+    data.forEach(person => {
+      let fname = person.name.first;
+      let lname = person.name.last;
+      let fullName = `${person.name.first} ${person.name.last}`;
+      if (fname.search(searchRegex) === 0 || lname.search(searchRegex) === 0 || fullName.search(searchRegex) === 0) {
+        let result = {
+          name: fullName,
+          type: person.jobTitle,
+          dist: 0
+        };
+        results.push(result);
+      }
+    });
+    results.forEach(result => {
+      result.dist = getEditDistance(result.name, searchName)
+    })
+    results.sort(compare);
+    console.log(results);
+    for (let i = 0; i < 5; i++) {
+      let div = document.createElement('div');
+      let p = document.createElement('p');
+      p.innerHTML = results[i].name;
+      div.appendChild(p)
+      resultsDiv.appendChild(div);
+    }
+  }
+}
+
+document.getElementById('fullName').addEventListener('keyup', liveSearch);
+
 const searchPerson = async () => {
-  const fname = document.getElementById('fname');
-  const lname = document.getElementById('lname');
+  const fullName = document.getElementById('fullName');
   const resultsDiv = document.getElementById('search_Results');
+  const liveSearchResults = document.getElementById('liveSearchResults');
+  liveSearchResults.innerHTML = '';
   resultsDiv.innerHTML = '';
   let data = await getData();
   let resultPerson = {};
   data.forEach(person => {
-    if ((`${person.name.first} ${person.name.last}`) === (`${fname.value} ${lname.value}`)) {
+    if ((`${person.name.first} ${person.name.last}`) === fullName.value) {
       resultPerson = person;
     }
   });
@@ -151,4 +214,42 @@ if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', showData)
 } else {
   showData();
+}
+
+function getEditDistance (a, b) {
+  if (a.length === 0) return b.length;
+  if (b.length === 0) return a.length;
+
+  let matrix = [];
+
+  for (let i = 0; i <= b.length; i++) {
+    matrix[i] = [i];
+  }
+
+  for (let j = 0; j <= a.length; j++) {
+    matrix[0][j] = j;
+  }
+
+  for (let i = 1; i <= b.length; i++) {
+    for (let j = 1; j <= a.length; j++) {
+      if (b.charAt(i-1) === a.charAt(j-1)) {
+        matrix[i][j] = matrix[i-1][j-1];
+      } else {
+        matrix[i][j] = Math.min(matrix[i-1][j-1] + 1, // Substitution
+                       Math.min(matrix[i][j-1] + 1, // Insertion
+                       matrix[i-1][j] + 1)); // Deletion
+      }
+    }
+  }
+  return matrix[b.length][a.length];
+}
+
+function compare(a, b) {
+  if (a.dist < b.dist) {
+    return -1;
+  }
+  if (a.dist > b.dist) {
+    return 1;
+  }
+  return 0;
 }
