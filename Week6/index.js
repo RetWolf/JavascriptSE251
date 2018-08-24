@@ -35,22 +35,6 @@ const showData = async () => {
 }
 
 const liveSearch = async (e) => {
-  /*const searchName = e.target.value;
-  let data = await getData();
-  let results = [];
-  data.forEach(person => {
-    let name = `${person.name.first} ${person.name.last}`;
-    let type = person.jobTitle;
-    let distance = getEditDistance(searchName, name);
-    let result = {
-      name: name,
-      type: type,
-      dist: distance
-    };
-    results.push(result);
-  });
-  results.sort(compare);
-  console.log(results);*/
   const resultsDiv = document.getElementById('liveSearchResults');
   resultsDiv.innerHTML = '';
   if (e.target.value !== '') {
