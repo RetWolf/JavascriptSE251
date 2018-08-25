@@ -37,9 +37,9 @@ const showData = async () => {
 const liveSearch = async (e) => {
   const resultsDiv = document.getElementById('liveSearchResults');
   resultsDiv.innerHTML = '';
-  if (e.target.value !== '') {
-    const searchRegex = new RegExp(`^${e.target.value}`, 'gim');
-    const searchName = e.target.value;
+  const searchName = e.target.value;
+  if (searchName !== '') {
+    const searchRegex = new RegExp(`^${searchName}`, 'gi');
     let data = await getData();
     let results = [];
     data.forEach(person => {
