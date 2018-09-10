@@ -32,6 +32,7 @@ const showData = async () => {
       }
     });
   }
+  options[0][4].classList.add('highestAvg');
 }
 
 const liveSearch = async (e) => {
