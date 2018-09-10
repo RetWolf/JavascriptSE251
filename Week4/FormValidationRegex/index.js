@@ -143,6 +143,9 @@ const hasErrors = () => {
    if(input.style.color === 'red') {
      i++;
    }
+   if (input.value === '') {
+     i++;
+   }
   })
   if (i < 1) {
     return false;
